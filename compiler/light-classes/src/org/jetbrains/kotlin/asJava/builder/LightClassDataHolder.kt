@@ -83,10 +83,12 @@ class LightClassDataHolderImpl(
     override fun findData(findDelegate: (PsiJavaFileStub) -> PsiClass) = findDelegate(javaFileStub).let(::LightClassDataImpl)
 }
 
+fun PsiJavaFileStub.findDelegateIfAny(classOrObject: KtClassOrObject): PsiClass? = findClass(this) {
+    ClsWrapperStubPsiFactory.getOriginalElement(it as StubElement<*>) == classOrObject
+}
+
 fun PsiJavaFileStub.findDelegate(classOrObject: KtClassOrObject): PsiClass {
-    findClass(this) {
-        ClsWrapperStubPsiFactory.getOriginalElement(it as StubElement<*>) == classOrObject
-    }?.let { return it }
+    findDelegateIfAny(classOrObject)?.let { return it }
 
     val outermostClassOrObject = getOutermostClassOrObject(classOrObject)
     val ktFileText: String? = try {

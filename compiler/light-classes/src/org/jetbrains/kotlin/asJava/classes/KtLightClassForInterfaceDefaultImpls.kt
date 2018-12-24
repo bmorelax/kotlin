@@ -33,7 +33,7 @@ class KtLightClassForInterfaceDefaultImpls(classOrObject: KtClassOrObject)
         return KtLightClassForInterfaceDefaultImpls(classOrObject.copy() as KtClassOrObject)
     }
 
-    override fun findLightClassData(): LightClassData {
+    override fun findLightClassData(): LightClassData? {
         return getLightClassDataHolder().findDataForDefaultImpls(classOrObject)
     }
 

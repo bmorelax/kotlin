@@ -86,7 +86,7 @@ abstract class KtLightClassForSourceDeclaration(protected val classOrObject: KtC
     abstract override fun getParent(): PsiElement?
     abstract override fun getQualifiedName(): String?
 
-    override val lightClassData: LightClassData
+    override val lightClassData: LightClassData?
         get() = findLightClassData()
 
     protected open fun findLightClassData() = getLightClassDataHolder().findDataForClassOrObject(classOrObject)

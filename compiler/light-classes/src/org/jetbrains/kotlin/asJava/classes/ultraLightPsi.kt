@@ -70,7 +70,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     @VisibleForTesting
     var isClsDelegateLoaded = false
 
-    override fun findLightClassData(): LightClassData = super.findLightClassData().also {
+    override fun findLightClassData(): LightClassData? = super.findLightClassData().also {
         if (!isClsDelegateLoaded) {
             isClsDelegateLoaded = true
             check(tooComplex) {
